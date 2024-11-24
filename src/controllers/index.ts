@@ -8,14 +8,12 @@ export const addContribution = async (req: any, res: any) => {
     try {
         const { amount, phone_number }=req.body
         const external_reference=`INV-${uuidv4().trim().split("-").slice(0,1)}`
-        // Concatenating username and password with colon 
-        const credentials = `${process.env.USERNAME}:${process.env.PASSWORD}`; 
         // Base64 encode the credentials 
-        const encodedCredentials = btoa(credentials); 
+        const encodedCredentials = Buffer.from(`${process.env.API_USERNAME}:${process.env.API_PASSWORD}`).toString('base64'); 
         const { data } = await axios.post('https://backend.payhero.co.ke/api/v2/payments', { 
-            amount, 
+            amount:Number(amount), 
             phone_number, 
-            channel_id: process.env.CHANNEL_ID, 
+            channel_id: Number(process.env.CHANNEL_ID), 
             provider: 'm-pesa', 
             external_reference, 
             callback_url: process.env.CALLBACK_URL 
@@ -44,15 +42,13 @@ export const addContributionUsingQueryParams = async (req: any, res: any) => {
     try {
         const { amount, phone_number }=req.query
         const external_reference=`INV-${uuidv4().trim().split("-").slice(0,1)}`
-        // Concatenating username and password with colon 
-        const credentials = `${process.env.USERNAME}:${process.env.PASSWORD}`; 
-        // Base64 encode the credentials 
-        const encodedCredentials =Buffer.from(credentials, 'base64'); 
+        // Concatenating username and password with colon then convert to base64
+        const encodedCredentials = Buffer.from(`${process.env.API_USERNAME}:${process.env.API_PASSWORD}`).toString('base64'); 
         console.log(encodedCredentials)
         const { data } = await axios.post('https://backend.payhero.co.ke/api/v2/payments', { 
-            amount, 
+            amount:Number(amount), 
             phone_number, 
-            channel_id: process.env.CHANNEL_ID, 
+            channel_id: Number(process.env.CHANNEL_ID), 
             provider: 'm-pesa', 
             external_reference, 
             callback_url: process.env.CALLBACK_URL 
