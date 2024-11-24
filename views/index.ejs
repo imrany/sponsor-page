@@ -124,12 +124,13 @@
                         submit_btn.innerHTML=notDisabled
                         error.innerText=parseRes.error
                     }else{
-                        submit_btn.innerHTML=Disabled
+                        submit_btn.innerHTML=disabled
                         if(parseRes.response.data.success==true){
                             setTimeout(()=>{
                                 checkPayment(parseRes.response.external_reference,e)
                             },6000)
                         }else{
+                            error.innerText="Cancelled"
                             submit_btn.innerHTML=notDisabled
                         }
                     }
