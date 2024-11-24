@@ -47,7 +47,8 @@ export const addContributionUsingQueryParams = async (req: any, res: any) => {
         // Concatenating username and password with colon 
         const credentials = `${process.env.USERNAME}:${process.env.PASSWORD}`; 
         // Base64 encode the credentials 
-        const encodedCredentials = btoa(credentials); 
+        const encodedCredentials =Buffer.from(credentials, 'base64'); 
+        console.log(encodedCredentials)
         const { data } = await axios.post('https://backend.payhero.co.ke/api/v2/payments', { 
             amount, 
             phone_number, 
