@@ -1,5 +1,5 @@
 import express from "express"
-import { addContribution, addContributionUsingQueryParams, fetchContributions, storeTransaction } from "../controllers";
+import { addContribution, addContributionUsingQueryParams, fetchContributionByRef, fetchContributions, storeTransaction } from "../controllers";
 
 const router=express.Router();
 
@@ -12,5 +12,6 @@ router.get("/contribute",addContributionUsingQueryParams)
 router.get("/callback",storeTransaction)
 //fetch all contributions from database
 router.get("/contributions",fetchContributions)
+router.get("/contributions/:external_reference",fetchContributionByRef)
 
 export default router;

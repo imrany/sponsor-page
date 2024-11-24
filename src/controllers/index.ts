@@ -63,7 +63,7 @@ export const addContributionUsingQueryParams = async (req: any, res: any) => {
 
         console.log(data)
         if(data.success){
-            res.status(201).json({message:`stk push was successfull`})
+            res.status(201).json({response:{external_reference,data}})
         }else{
             res.status(204).json({error:`stk push was unsuccessfull`})
         }
@@ -120,6 +120,24 @@ export const fetchContributions = async (req: any, res: any) => {
             } else {
                 console.log({ contributors: data });
                 res.status(200).json({ contributors: data });
+            };
+        });
+    } catch (error) {
+        console.error("Error fetching contributions:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+export const fetchContributionByRef = async (req: any, res: any) => {
+    try {
+        const { external_reference }=req.params
+        db.all(`SELECT * FROM contributors WHERE external_reference=$1;`,[external_reference], (error, data) => {
+            if (error) {
+                console.log({ error: error })
+                res.send({ error: error })
+            } else {
+                console.log({ data });
+                res.status(200).json({ sucess:true, data });
             };
         });
     } catch (error) {

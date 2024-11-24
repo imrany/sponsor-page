@@ -95,13 +95,19 @@
                 <p>Sending stk push, check your phone...</p>
             </button>
             `
+            let processing=`
+            <button disabled class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-gray-400 text-black shadow-sm hover:bg-accent hover:text-accent-foreground h-[40px] w-full">
+                <p>Processing...</p>
+            </button>
+            `
+
             submit_btn.innerHTML=notDisabled
 
             submit_form.addEventListener("submit",async(e)=>{
                 try {
                     e.preventDefault();
                     error.innerText=""
-                    submit_btn.innerHTML=disabled
+                    submit_btn.innerHTML=processing
                     const url=`/api/contribute`
                     const response=await fetch(url,{
                         method:"POST",
@@ -117,10 +123,15 @@
                     if(parseRes.error){
                         submit_btn.innerHTML=notDisabled
                         error.innerText=parseRes.error
-                        dialog_background.innerHTML=appreciation_dialog
                     }else{
-                        e.reset()
-                        console.log(parseRes.message)
+                        submit_btn.innerHTML=Disabled
+                        if(parseRes.response.data.success==true){
+                            setTimeout(()=>{
+                                checkPayment(parseRes.response.external_reference,e)
+                            },6000)
+                        }else{
+                            submit_btn.innerHTML=notDisabled
+                        }
                     }
                 } catch (error) {
                     submit_btn.innerHTML=notDisabled
@@ -129,6 +140,24 @@
                 }
             })
 
+            async function checkPayment(external_reference,e) {
+                try {
+                    const response=await fetch(`/api/contributions/${external_reference}`)
+                    const parseRes=await response.json()
+                    if(parseRes.error){
+                        submit_btn.innerHTML=notDisabled
+                        error.innerText=parseRes.error
+                    }else{
+                        e.target.reset()
+                        submit_btn.innerHTML=notDisabled
+                        parseRes.sucess==true?dialog_background.innerHTML=appreciation_dialog:""
+                    }
+                } catch (error) {
+                    submit_btn.innerHTML=notDisabled
+                    console.log(error.message)
+                    error.innerText=error.message
+                }
+            }
             document.getElementById("dialog_background").addEventListener("dblclick",()=>closeDialog())
             function closeDialog() {
                 console.log("disappear")

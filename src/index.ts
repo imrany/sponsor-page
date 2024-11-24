@@ -3,6 +3,7 @@ import cors from "cors"
 import { config } from "dotenv"
 import router from "./routes"
 import views from "./routes/views"
+import axios from "axios"
 config()
 
 const corsOptions={
@@ -29,3 +30,7 @@ const PORT = process.env.PORT||8000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+setInterval(async()=>{
+  await axios.get(`${process.env.BASE_URL}`)
+},14* 60 * 1000)
