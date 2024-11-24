@@ -1,0 +1,9 @@
+{
+    "name":"Sponsor opensource projects",
+    "short_name":"Sponsort opensource projects",
+    "description":"Contribute and sponsor kenyan opensource projects",
+    "display":"fullscreen",
+    "orientation":"portrait",
+    "start_url":"/",
+    "icons":[]
+}

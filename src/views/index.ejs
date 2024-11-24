@@ -1,0 +1,93 @@
+<html lang="en">
+    <%- include('./partials/head.ejs')%>
+    <body>
+        <div class="flex font-[family-name:var(--font-geist-sans)] items-center flex-col h-screen w-screen  bg-gradient-to-t from-blue-100/20 dark:from-blue-900/5">
+            <svg 
+                aria-hidden
+                class="pointer-events-none [z-index:-1] absolute inset-0 h-full w-full fill-blue-500/50 stroke-blue-500/50 [mask-img:linear-gradient(to_top,_#ffffffad,_transparent)] opacity-[.30]" 
+                style="visibility: visible;"
+            >
+                <defs>
+                    <pattern id=":Rs57qbt6ja:" width="20" height="20" pattern-units="userSpaceOnUse" x="-1" y="-1">
+                        <path d="M.5 20V.5H20" fill="none" stroke-dasharray="0"></path>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" strokeWidth="0" fill="url(#:Rs57qbt6ja:)"></rect>
+            </svg>
+            <div class="md:w-[500px] w-[90vw] flex items-center rounded-none h-screen shadow-none border-x-[1px] border-dashed border-x-[var(--primary-01)]">
+                <div id="card" class="rounded-xl border bg-card text-card-foreground shadow w-full rounded-none shadow-none border-y-[1px] border-dashed border-y-[var(--primary-01)]">
+                    <div id="card-header" class="flex flex-col space-y-1.5 p-6">
+                        <div id="card-title" class="font-semibold leading-none tracking-tight text-3xl font-semibold text-[var(--primary-01)]">Welcome Back!</div>
+                        <div id="card-description" class="text-sm text-muted-foreground">Get started by sign in to your account.</div>
+                    </div>
+                    <div id="card-content" class="p-6 pt-0">
+                        <form id="submit_form">
+                            <p class="text-red-500 text-sm" id="error"></p>
+                            <div class="grid w-full items-center gap-4">
+                                <div class="flex flex-col space-y-1.5">
+                                    <label for="phone_number" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--primary-01)] font-semibold">Enter Mpesa number</label>
+                                    <input id="phone_number" name="phone_number" type="text" placeholder="0703720753" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-[var(--primary-01)] outline-[1px] active:outline-[var(--primary-01)] focus:border-[var(--primary-01)] outline-[var(--primary-01)]" required/>
+                                </div>
+                                <div class="flex flex-col space-y-1.5">
+                                    <label for="amount" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--primary-01)] font-semibold">Amount</label>
+                                    <input id="amount" name="amount" type="number" placeholder="any amount is appreciated" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-[var(--primary-01)] outline-[1px] active:outline-[var(--primary-01)] focus:border-[var(--primary-01)] outline-[var(--primary-01)]" required/>
+                                </div>
+                                <div id="submit_btn"></div>
+                                
+                                <div class="flex gap-1 text-gray-600 items-center justify-center md:text-sm text-xs">
+                                    <p>Don't have an account?</p>
+                                    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let submit_form=document.getElementById("submit_form");
+            let submit_btn=document.getElementById("submit_btn")
+            let error_text=document.getElementById("error")
+
+            let notDisabled=`
+            <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-[40px] bg-primary text-primary-foreground shadow hover:bg-primary/90 bg-[var(--primary-01)] hover:bg-[var(--primary-01)]">
+                <p>Sign in</p>
+            </button>
+            `
+            let disabled=`
+            <button disabled class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-[40px] bg-[var(--primary-01)] hover:bg-[var(--primary-01)]">
+                <p>Sending...</p>
+            </button>
+            `
+            submit_btn.innerHTML=notDisabled
+
+            submit_form.addEventListener("submit",async(e)=>{
+                try {
+                    e.preventDefault();
+                    submit_btn.innerHTML=disabled
+                    const url=`/api/contribute`
+                    const response=await fetch(url,{
+                        method:"POST",
+                        headers:{
+                            "content-type":"application/json"
+                        },
+                        body:JSON.stringify({
+                            phone_number,
+                            amount
+                        })
+                    })
+                    const parseRes=await response.json()
+                    if(parseRes.error){
+                        error.innerText=parseRes.error
+                    }else{
+                        console.log(parseRes.message)
+                    }
+                } catch (error) {
+                    submit_btn.innerHTML=notDisabled
+                    console.log(error.message)
+                    error.innerText=error.message
+                }
+            })
+        </script>
+    </body>
+</html>
