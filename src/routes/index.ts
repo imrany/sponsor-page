@@ -9,7 +9,7 @@ router.post("/contribute",addContribution)
 router.get("/contribute",addContributionUsingQueryParams)
 
 //callback : get
-router.get("/callback",storeTransaction)
+router.post("/callback",storeTransaction)
 //fetch all contributions from database
 router.get("/contributions",fetchContributions)
 router.get("/contributions/:external_reference",fetchContributionByRef)
