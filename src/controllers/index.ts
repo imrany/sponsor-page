@@ -87,7 +87,7 @@ export const storeTransaction = async (req: any, res: any) => {
             Status
         }=req.body.response
         console.log(req.body)
-        db.run(`INSERT INTO contributors (amount, CheckoutRequestID, ExternalReference, MerchantRequestID, MpesaReceiptNumber, Phone, ResultCode, ResultDesc, Status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);`,[
+        db.run(`INSERT INTO contributors (Amount, CheckoutRequestID, ExternalReference, MerchantRequestID, MpesaReceiptNumber, Phone, ResultCode, ResultDesc, Status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);`,[
             Amount, 
             CheckoutRequestID, 
             ExternalReference, 

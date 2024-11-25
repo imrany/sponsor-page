@@ -13,10 +13,11 @@ export const db = new sqlite3.Database("database.db" , (err) => {
 const Contributors = `
 CREATE TABLE IF NOT EXISTS contributors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    amount INTEGER NOT NULL,
+    Amount INTEGER NOT NULL,
     CheckoutRequestID TEXT NOT NULL,
     ExternalReference TEXT UNIQUE NOT NULL,
     MerchantRequestID TEXT NOT NULL,
+    MpesaReceiptNumber TEXT NOT NULL,
     Phone TEXT NOT NULL,
     ResultCode INTEGER NOT NULL,
     ResultDesc TEXT NOT NULL,
