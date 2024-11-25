@@ -13,48 +13,46 @@
             <div id="dialog_background"></div>
             <div class="md:w-[500px] w-[90vw] flex items-center rounded-none h-screen shadow-none border-x-[1px] border-dashed border-x-[var(--primary-01)]">
                 <div id="card" class="border bg-card text-card-foreground shadow w-full rounded-none shadow-none border-y-[1px] border-dashed border-y-[var(--primary-01)]">
-                    <div id="card-header" class="flex flex-col space-y-1.5 p-6">
+                    <div id="card-header" class="flex flex-col space-y-1.5 p-6 max-md:py-6 max-md:px-3">
                         <div id="card-title" class="font-semibold leading-none tracking-tight text-3xl font-semibold text-[var(--primary-01)]">Opensource contribution 🎉</div>
                         <div id="card-description" class="text-sm text-muted-foreground">Sponsor our opensource projects with your donations 🙏</div>
                     </div>
-                    <div id="card-content" class="p-6 flex flex-col items-center pt-0">
-                        <p class="text-red-500 text-sm text-center w-full" id="error"></p>
-                        <form id="submit_form">
-                            <div class="grid w-full items-center gap-4">
-                                <div class="flex flex-col space-y-1.5">
-                                    <label for="phone_number" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--primary-01)] font-semibold">Enter Mpesa number</label>
-                                    <input id="phone_number" name="phone_number" type="text" placeholder="0703720753" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-[var(--primary-01)] outline-[1px] active:outline-[var(--primary-01)] focus:border-[var(--primary-01)] outline-[var(--primary-01)]" required/>
-                                </div>
-                                <div class="flex flex-col space-y-1.5">
-                                    <label for="amount" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--primary-01)] font-semibold">Amount</label>
-                                    <input id="amount" name="amount" type="number" placeholder="any amount is appreciated" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-[var(--primary-01)] outline-[1px] active:outline-[var(--primary-01)] focus:border-[var(--primary-01)] outline-[var(--primary-01)]" required/>
-                                </div>
-                                <div id="submit_btn"></div>
-                                
-                                <div class="flex gap-2 text-gray-600 items-center justify-center md:text-sm text-xs">
-                                    <a href="https://github.com/imrany?tab=repositories" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
-                                        <span>Github </span>
-                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                    </a>
-                                    <a href="https://x.com/matano_imran" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
-                                        <span>Twitter </span>
-                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                    </a>
-                                    <a href="https://instagram.com/its_imrany" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
-                                        <span>Instagram </span>
-                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                    </a>
-                                    <a href="https://www.youtube.com/@software_dev_ke" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
-                                        <span>Youtube </span>
-                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                    </a>
-                                    <a href="https://www.reddit.com/user/Malliant_basement" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
-                                        <span>Reddit </span>
-                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                    </a>
-                                </div>
+                    <form id="submit_form" id="card-content submit_form" class="flex flex-col items-center">
+                        <p class="text-red-500 text-sm text-center md:w-full w-[80%]" id="error"></p>
+                        <div class="flex flex-col p-6 max-md:py-6 max-md:px-3 gap-4 w-full">
+                            <div class="flex flex-col space-y-1.5">
+                                <label for="phone_number" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--primary-01)] font-semibold">Enter Mpesa number</label>
+                                <input id="phone_number" name="phone_number" type="text" placeholder="0703720753" class="flex h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-[var(--primary-01)] outline-[1px] active:outline-[var(--primary-01)] focus:border-[var(--primary-01)] outline-[var(--primary-01)]" required/>
                             </div>
-                        </form>
+                            <div class="flex flex-col space-y-1.5">
+                                <label for="amount" class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--primary-01)] font-semibold">Amount</label>
+                                <input id="amount" name="amount" type="number" placeholder="any amount is appreciated" class="flex h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-[var(--primary-01)] outline-[1px] active:outline-[var(--primary-01)] focus:border-[var(--primary-01)] outline-[var(--primary-01)]" required/>
+                            </div>
+                            <div id="submit_btn"></div>
+                            
+                            <div class="flex flex-wrap gap-2 text-gray-600 items-center justify-center md:text-sm text-xs">
+                                <a href="https://github.com/imrany?tab=repositories" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
+                                    <span>Github </span>
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                                <a href="https://x.com/matano_imran" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
+                                    <span>Twitter </span>
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                                <a href="https://instagram.com/its_imrany" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
+                                    <span>Instagram </span>
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                                <a href="https://www.youtube.com/@software_dev_ke" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
+                                    <span>Youtube </span>
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                                <a href="https://www.reddit.com/user/Malliant_basement" class="flex items-center gap-[1px] hover:text-[var(--primary-01)]" rel="noopenner noreferrer" target="_blank">
+                                    <span>Reddit </span>
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,8 +94,19 @@
             </button>
             `
             let processing=`
-            <button disabled class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-gray-400 text-black shadow-sm hover:bg-accent hover:text-accent-foreground h-[40px] w-full">
-                <p>Processing...</p>
+            <button disabled class="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-gray-400 text-black shadow-sm hover:bg-accent hover:text-accent-foreground h-[40px] w-full">
+                <svg class="spinner text-base" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
+                    <path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/>
+                </svg>
+                <p>Processing</p>
+            </button>
+            `
+            let checkPaymentRef=`
+            <button disabled class="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-gray-400 text-black shadow-sm hover:bg-accent hover:text-accent-foreground h-[40px] w-full">
+                <svg class="spinner text-base" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
+                    <path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/>
+                </svg>
+                <p>Checking payment</p>
             </button>
             `
 
@@ -124,11 +133,12 @@
                         submit_btn.innerHTML=notDisabled
                         error.innerText=parseRes.error
                     }else{
-                        submit_btn.innerHTML=disabled
+                        console.log(parseRes)
                         if(parseRes.response.data.success==true){
+                            submit_btn.innerHTML=disabled
                             setTimeout(()=>{
                                 checkPayment(parseRes.response.external_reference,e)
-                            },6000)
+                            },10000)
                         }else{
                             error.innerText="Cancelled"
                             submit_btn.innerHTML=notDisabled
@@ -147,11 +157,17 @@
                     const parseRes=await response.json()
                     if(parseRes.error){
                         submit_btn.innerHTML=notDisabled
+                        console.log(parseRes.error)
                         error.innerText=parseRes.error
                     }else{
-                        e.target.reset()
+                        console.log(parseRes)
                         submit_btn.innerHTML=notDisabled
-                        parseRes.sucess==true?dialog_background.innerHTML=appreciation_dialog:""
+                        if(parseRes.sucess===true){
+                            e.target.reset()
+                            dialog_background.innerHTML=appreciation_dialog
+                        }else{
+                            error.innerText="Transaction not complete, please try again"
+                        }
                     }
                 } catch (error) {
                     submit_btn.innerHTML=notDisabled
@@ -159,6 +175,7 @@
                     error.innerText=error.message
                 }
             }
+
             document.getElementById("dialog_background").addEventListener("dblclick",()=>closeDialog())
             function closeDialog() {
                 console.log("disappear")
