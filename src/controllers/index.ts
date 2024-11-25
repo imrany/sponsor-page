@@ -28,7 +28,7 @@ export const addContribution = async (req: any, res: any) => {
         
         console.log(data)
         if(data.success){
-            res.status(201).json({message:`stk push was successfull`})
+            res.status(201).json({response:{external_reference,data}})
         }else{
             res.status(204).json({error:`stk push was unsuccessfull`})
         }
@@ -86,6 +86,7 @@ export const storeTransaction = async (req: any, res: any) => {
             ResultDesc,
             Status
         }=req.body.response
+        console.log(req.body)
         db.run(`INSERT INTO contributors (amount, CheckoutRequestID, ExternalReference, MerchantRequestID, MpesaReceiptNumber, Phone, ResultCode, ResultDesc, Status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);`,[
             amount, 
             CheckoutRequestID, 
@@ -131,17 +132,21 @@ export const fetchContributions = async (req: any, res: any) => {
 export const fetchContributionByRef = async (req: any, res: any) => {
     try {
         const { external_reference }=req.params
-        db.all(`SELECT * FROM contributors WHERE external_reference=$1;`,[external_reference], (error, data) => {
+        db.all(`SELECT * FROM contributors WHERE ExternalReference=$1;`,[external_reference], (error, data) => {
             if (error) {
                 console.log({ error: error })
-                res.send({ error: error })
+                res.send({ error: error.message })
             } else {
-                console.log({ data });
-                res.status(200).json({ sucess:true, data });
+                console.log(data[0]);
+                if(data[0]){
+                    res.status(200).json({ sucess:true, data });
+                }else{
+                    res.status(200).json({ sucess:false });
+                }
             };
         });
     } catch (error) {
-        console.error("Error fetching contributions:", error);
+        console.error("Error fetching contribution:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
