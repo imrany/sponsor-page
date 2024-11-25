@@ -109,6 +109,11 @@
                 <p>Checking payment</p>
             </button>
             `
+            let tryAgain=`
+            <button type="submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-[40px] w-full bg-primary text-white shadow hover:bg-primary/90 bg-[var(--primary-01)] hover:bg-[var(--primary-01)]">
+                <p>Please try again</p>
+            </button>
+            `
 
             submit_btn.innerHTML=notDisabled
 
@@ -161,12 +166,13 @@
                         error.innerText=parseRes.error
                     }else{
                         console.log(parseRes)
-                        submit_btn.innerHTML=notDisabled
                         if(parseRes.sucess===true){
                             e.target.reset()
                             dialog_background.innerHTML=appreciation_dialog
+                            submit_btn.innerHTML=notDisabled
                         }else{
-                            error.innerText="Transaction not complete, please try again"
+                            error.innerText="Transaction not complete"
+                        submit_btn.innerHTML=tryAgain
                         }
                     }
                 } catch (error) {
