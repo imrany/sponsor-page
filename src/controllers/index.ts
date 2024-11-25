@@ -76,7 +76,7 @@ export const addContributionUsingQueryParams = async (req: any, res: any) => {
 export const storeTransaction = async (req: any, res: any) => {
     try {
         const { 
-            amount, 
+            Amount, 
             CheckoutRequestID, 
             ExternalReference, 
             MerchantRequestID,
@@ -88,7 +88,7 @@ export const storeTransaction = async (req: any, res: any) => {
         }=req.body.response
         console.log(req.body)
         db.run(`INSERT INTO contributors (amount, CheckoutRequestID, ExternalReference, MerchantRequestID, MpesaReceiptNumber, Phone, ResultCode, ResultDesc, Status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);`,[
-            amount, 
+            Amount, 
             CheckoutRequestID, 
             ExternalReference, 
             MerchantRequestID,
