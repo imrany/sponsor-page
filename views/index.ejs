@@ -138,7 +138,7 @@
                             submit_btn.innerHTML=disabled
                             setTimeout(()=>{
                                 checkPayment(parseRes.response.external_reference,e)
-                            },10000)
+                            },60 *1000)
                         }else{
                             error.innerText="Cancelled"
                             submit_btn.innerHTML=notDisabled
